@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
+    <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
+    <PreserveCompilationReferences>true</PreserveCompilationReferences>
+    <UserSecretsId>Fundanet.Arco.Core.Aspire-4681b4fd-151f-4221-84a4-929d86723e4c</UserSecretsId>
+    <RootNamespace>Fundanet.Arco.Core.Aspire.Blazor</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.StackExchange.Redis" Version="8.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.4" />
+    <PackageReference Include="Blazorise.Bootstrap5" Version="1.5.2" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.5.2" />
+    <PackageReference Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.0.0-dev-00313" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AspNetCore.Components.Server.LeptonXLiteTheme" Version="3.2.0" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.Theme.LeptonXLite" Version="3.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Fundanet.Arco.Core.Aspire.Application\Fundanet.Arco.Core.Aspire.Application.csproj" />
+    <ProjectReference Include="..\Fundanet.Arco.Core.Aspire.Blazor.Client\Fundanet.Arco.Core.Aspire.Blazor.Client.csproj" />
+    <ProjectReference Include="..\Fundanet.Arco.Core.Aspire.HttpApi\Fundanet.Arco.Core.Aspire.HttpApi.csproj" />
+    <ProjectReference Include="..\Fundanet.Arco.Core.Aspire.EntityFrameworkCore\Fundanet.Arco.Core.Aspire.EntityFrameworkCore.csproj" />
+    <ProjectReference Include="..\Fundanet.Arco.Core.Aspire.ServiceDefaults\Fundanet.Arco.Core.Aspire.ServiceDefaults.csproj" />
+    <PackageReference Include="Volo.Abp.Autofac" Version="8.3.2" />
+    <PackageReference Include="Volo.Abp.Swashbuckle" Version="8.3.2" />
+    <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="8.3.2" />
+    <PackageReference Include="Volo.Abp.Account.Web.OpenIddict" Version="8.3.2" />
+    <PackageReference Include="Volo.Abp.Identity.Blazor.Server" Version="8.3.2" />
+    <PackageReference Include="Volo.Abp.TenantManagement.Blazor.Server" Version="8.3.2" />
+    <PackageReference Include="Volo.Abp.SettingManagement.Blazor.Server" Version="8.3.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition="Exists('./openiddict.pfx')">
+    <None Remove="openiddict.pfx" />
+    <EmbeddedResource Include="openiddict.pfx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Logs\**" />
+    <Content Remove="Logs\**" />
+    <EmbeddedResource Remove="Logs\**" />
+    <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Pages\**\*.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Pages\**\*.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
